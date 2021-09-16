@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+{% load bootstrap %}
+{% block title %}
+<title>Profile</title>
+{% endblock%}
+
+{% block main_content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>Current Details</h1>
+            <div class="card">
+                <div class="card-body">
+                    <img src="/{{request.user.profile.profile_pic}}" width="400" class="img-responsive">
+
+                </div>
+                <div class="card-footer">
+                    <div class="py-3">Firstname : {{request.user.profile.firstname}}</div>
+                    <div class="py-3">Lastname : {{request.user.profile.lastname}}</div>
+                    <div class="py-3">Email : {{request.user.profile.email}}</div>
+                    <div class="py-3">Phone : {{request.user.profile.phone}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="col-md-12">
+               {% include 'products/message.html' %}
+                <h1 class="text-center">Update Details</h1>
+                <div class="card py-2 px-2">
+                    <form class="form myForm" action="" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form | bootstrap_horizontal}}
+                        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<script>
+    var form_fields = document.getElementsByTagName('input')
+    form_fields[1].placeholder = 'Enter first name';
+    form_fields[2].placeholder = 'Enter last name';
+    form_fields[3].placeholder = 'Enter email address';
+    form_fields[4].placeholder = 'Enter phone number';
+
+    for (var field in form_fields){
+    field.className += ' my-2'
+    }
+
+</script>
+
+{% endblock %}

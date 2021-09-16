@@ -1,0 +1,39 @@
+{% extends 'layout-admin.html' %}
+{% block title %}
+<title>All Users</title>
+{% endblock%}
+
+{% block main_content %}
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-10 offset-md-1">
+            <h1 class="text-center">All Users</h1>
+            <div class="card p-2">
+               {% include 'products/message.html' %}
+                <a class="btn btn-primary btn-sm ms-auto" href="#">Add Users</a>
+                <table class="table-striped">
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                    {% for i in users %}
+                    <tr>
+                        <td> {{ i.username }}</td>
+                        <td> {{ i.email }}</td>
+                        <td><a class="btn btn-primary btn-sm"
+                               href="#">Deactivate</a> &nbsp;
+                            <a class="btn btn-danger btn-sm"
+                               href="/promote_user/{{i.id}}"
+                               onclick="return confirm('Are you sure want to promote this user?')"
+                            >Promote to Admin</a></td>
+                    </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main_content %}
